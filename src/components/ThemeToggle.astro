@@ -19,12 +19,6 @@
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
 
-  // 初始化：從 localStorage 讀取，預設跟隨系統
-  const stored = localStorage.getItem('theme');
-  if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    html.classList.add('dark');
-  }
-
   toggle?.addEventListener('click', () => {
     const isDark = html.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
