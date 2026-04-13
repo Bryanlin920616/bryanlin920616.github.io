@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { profile } from '../../data/profile';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+<BaseLayout title={`Blog — ${profile.name}`}>
+  <div class="max-w-2xl mx-auto px-6 py-16">
+
+    <h1 class="text-4xl font-extrabold text-warm-fg dark:text-dark-fg mb-3">Blog</h1>
+    <div class="w-8 h-0.5 bg-warm-accent dark:bg-dark-accent mb-8"></div>
+
+    {posts.length === 0 ? (
+      <div class="text-center py-20">
+        <p class="text-warm-muted dark:text-dark-muted text-base">文章即將推出。</p>
+      </div>
+    ) : (
+      <ul class="space-y-6">
+        {posts.map(post => (
+          <li>
+            <a href={`/blog/${post.slug}`} class="group block">
+              <time class="text-xs text-warm-subtle dark:text-dark-muted">
+                {post.data.pubDate.toLocaleDateString('zh-TW')}
+              </time>
+              <h2 class="text-lg font-semibold text-warm-fg dark:text-dark-fg group-hover:text-warm-accent dark:group-hover:text-dark-accent transition-colors mt-1">
+                {post.data.title}
+              </h2>
+              <p class="text-sm text-warm-muted dark:text-dark-muted mt-1 leading-relaxed">
+                {post.data.description}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+
+  </div>
+</BaseLayout>
