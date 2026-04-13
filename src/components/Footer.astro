@@ -1,0 +1,21 @@
+---
+import { profile } from '../data/profile';
+---
+<footer class="border-t border-warm-border dark:border-dark-border mt-24">
+  <div class="max-w-5xl mx-auto px-6 py-10 flex items-center justify-between flex-wrap gap-4">
+    <p class="text-sm text-warm-muted dark:text-dark-muted">
+      © {new Date().getFullYear()} {profile.name}
+    </p>
+    <div class="flex items-center gap-5">
+      <a href={`mailto:${profile.email}`} class="text-sm text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
+        Email
+      </a>
+      <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-sm text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
+        GitHub
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="text-sm text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</footer>

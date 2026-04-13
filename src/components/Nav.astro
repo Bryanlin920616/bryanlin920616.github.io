@@ -1,0 +1,32 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+const links = [
+  { href: '/about', label: 'About' },
+  { href: '/work', label: 'Work' },
+  { href: '/blog', label: 'Blog' },
+];
+const currentPath = Astro.url.pathname;
+---
+<header class="sticky top-0 z-50 bg-warm-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm border-b border-warm-border dark:border-dark-border">
+  <nav class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="/" class="text-sm font-bold tracking-wide text-warm-fg dark:text-dark-fg hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
+      LJL
+    </a>
+    <div class="flex items-center gap-6">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class:list={[
+            'text-sm transition-colors',
+            currentPath.startsWith(link.href)
+              ? 'text-warm-fg dark:text-dark-fg font-medium'
+              : 'text-warm-muted dark:text-dark-muted hover:text-warm-fg dark:hover:text-dark-fg',
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
