@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TechPill from '../components/TechPill.astro';
+import { profile } from '../data/profile';
+---
+<BaseLayout title={`About — ${profile.name}`} description="關於我的介紹、技能與工作經歷">
+  <div class="max-w-2xl mx-auto px-6 py-16">
+
+    <h1 class="text-4xl font-extrabold text-warm-fg dark:text-dark-fg mb-3">About</h1>
+    <div class="w-8 h-0.5 bg-warm-accent dark:bg-dark-accent mb-8"></div>
+
+    <!-- Bio -->
+    <section class="mb-12">
+      <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-4">
+        我是 Lin Jun Li，一名後端為主的全端工程師，目前專注於建立可擴展的系統架構與 API 設計。
+      </p>
+      <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
+        喜歡把複雜的問題拆解成清晰的解法，並透過乾淨的程式碼讓產品真正運作。
+      </p>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-12">
+      <h2 class="text-sm font-medium tracking-widest text-warm-subtle dark:text-dark-muted uppercase mb-4">Skills</h2>
+      <div class="flex flex-wrap gap-2">
+        {profile.skills.map(skill => <TechPill label={skill} />)}
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section>
+      <h2 class="text-sm font-medium tracking-widest text-warm-subtle dark:text-dark-muted uppercase mb-6">Experience</h2>
+      <div class="space-y-8">
+        <div class="flex gap-4">
+          <div class="text-xs text-warm-subtle dark:text-dark-muted mt-1 w-24 shrink-0">2024 – 現在</div>
+          <div>
+            <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg">職位名稱</h3>
+            <p class="text-sm text-warm-accent dark:text-dark-accent mb-1">公司名稱</p>
+            <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
+              簡短描述工作內容與成就。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
