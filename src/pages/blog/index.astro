@@ -8,10 +8,12 @@ const posts = (await getCollection('blog'))
   .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
 ---
 <BaseLayout title={`Blog — ${profile.name}`}>
-  <div class="max-w-2xl mx-auto px-6 py-16">
+  <div class="max-w-5xl mx-auto px-6 py-16">
 
-    <h1 class="text-4xl font-extrabold text-warm-fg dark:text-dark-fg mb-3">Blog</h1>
-    <div class="w-8 h-0.5 bg-warm-accent dark:bg-dark-accent mb-8"></div>
+    <h1 class="font-display text-4xl font-bold text-warm-fg dark:text-dark-fg mb-3">Blog</h1>
+    <div class="w-8 h-0.5 bg-warm-accent dark:bg-dark-accent mb-10"></div>
+
+    <div class="max-w-2xl">
 
     {posts.length === 0 ? (
       <div class="text-center py-20">
@@ -37,5 +39,6 @@ const posts = (await getCollection('blog'))
       </ul>
     )}
 
+    </div><!-- /max-w-2xl -->
   </div>
 </BaseLayout>

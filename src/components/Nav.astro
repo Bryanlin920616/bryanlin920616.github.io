@@ -1,18 +1,23 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 const links = [
-  { href: '/about', label: 'About' },
+  { href: '/about',    label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/blog',     label: 'Blog' },
 ];
 const currentPath = Astro.url.pathname;
 ---
-<header class="sticky top-0 z-50 bg-warm-bg/80 dark:bg-dark-bg/80 backdrop-blur-sm border-b border-warm-border dark:border-dark-border">
+<header class="sticky top-0 z-50 bg-warm-bg/85 dark:bg-dark-bg/85 backdrop-blur-md border-b border-warm-border dark:border-dark-border">
   <nav class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-    <a href="/" class="text-sm font-bold tracking-wide text-warm-fg dark:text-dark-fg hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
-      LJL
+
+    <a
+      href="/"
+      class="font-display font-bold text-sm tracking-wide text-warm-fg dark:text-dark-fg hover:text-warm-accent dark:hover:text-dark-accent transition-colors"
+    >
+      Bryan Lin
     </a>
-    <div class="flex items-center gap-6">
+
+    <div class="flex items-center gap-7">
       {links.map(link => (
         <a
           href={link.href}
@@ -28,5 +33,6 @@ const currentPath = Astro.url.pathname;
       ))}
       <ThemeToggle />
     </div>
+
   </nav>
 </header>
