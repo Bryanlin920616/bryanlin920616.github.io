@@ -7,24 +7,22 @@ const skillGroups = [
 ];
 ---
 <section
-  class="max-w-5xl mx-auto px-6 py-12 border-t border-warm-border dark:border-dark-border"
+  class="max-w-5xl mx-auto px-6 py-10 border-t border-warm-border dark:border-dark-border"
   data-fade
 >
-  <p class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-8">
+  <p class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-6">
     Tech Stack
   </p>
 
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8">
+  <div class="flex flex-col gap-3">
     {skillGroups.map(group => (
-      <div>
-        <p class="text-xs font-medium text-warm-subtle dark:text-dark-muted mb-3 tracking-wide">
+      <div class="flex items-baseline gap-4 sm:gap-6">
+        <span class="text-xs text-warm-subtle dark:text-dark-muted w-20 shrink-0 pt-px">
           {group.label}
+        </span>
+        <p class="text-sm text-warm-fg dark:text-dark-fg leading-relaxed">
+          {group.skills.join(' · ')}
         </p>
-        <ul class="flex flex-col gap-2">
-          {group.skills.map(skill => (
-            <li class="text-sm text-warm-fg dark:text-dark-fg">{skill}</li>
-          ))}
-        </ul>
       </div>
     ))}
   </div>
