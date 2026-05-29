@@ -26,6 +26,51 @@
   }
 }
 
+@layer components {
+  .prose blockquote p:first-of-type::before,
+  .prose blockquote p:last-of-type::after {
+    content: none;
+  }
+
+  .prose blockquote {
+    @apply border-l-warm-accent dark:border-l-dark-accent text-warm-muted dark:text-dark-muted font-normal;
+  }
+
+  .prose :where(pre code):not(:where(.not-prose, .not-prose *)) {
+    @apply text-[0.82rem] leading-relaxed;
+    color: inherit;
+  }
+}
+
+.prose.prose-stone :where(pre):not(:where(.not-prose, .not-prose *)) {
+  background-color: #f2eee7 !important;
+  border: 1px solid #e6e1d9;
+  color: #1c1814 !important;
+}
+
+.dark .prose :where(pre):not(:where(.not-prose, .not-prose *)) {
+  background-color: rgba(255, 248, 240, 0.09) !important;
+  border-color: rgba(255, 245, 230, 0.09);
+  color: #f5f1eb !important;
+}
+
+.prose :where(.astro-code span):not(:where(.not-prose, .not-prose *)) {
+  color: inherit !important;
+}
+
+.toc-child-collapsed {
+  max-height: 0;
+  margin-top: 0 !important;
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+[data-application-child="true"]:not(.toc-child-collapsed) {
+  max-height: 1.5rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ─── Entrance animations (Hero) ─── */
 @keyframes fade-up {
   from { opacity: 0; transform: translateY(18px); }

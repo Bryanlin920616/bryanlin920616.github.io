@@ -11,19 +11,139 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+const applicationSubheadings = new Set(['SoP', 'PS', 'LoR', 'CV / Resume', 'Video essays']);
+const applicationHeading = headings.find(heading => heading.depth === 2 && heading.text === '申請文件');
+const applicationSlug = applicationHeading?.slug;
+const tocItems = headings
+  .filter(heading => heading.depth === 2 || (heading.depth === 3 && applicationSubheadings.has(heading.text)))
+  .map(heading => ({
+    ...heading,
+    depth: heading.depth === 3 ? 3 : 2,
+  }));
+
+const plainBody = post.body
+  .replace(/```[\s\S]*?```/g, ' ')
+  .replace(/`[^`]*`/g, ' ')
+  .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
+  .replace(/\[[^\]]*\]\([^)]+\)/g, ' ')
+  .replace(/[#>*_\-[\]()~|]/g, ' ');
+
+const cjkChars = plainBody.match(/[\u3400-\u9fff]/g)?.length ?? 0;
+const latinWords = plainBody.match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)*/g)?.length ?? 0;
+const wordCount = cjkChars + latinWords;
+const readingMinutes = Math.max(1, Math.ceil(cjkChars / 250 + latinWords / 225));
 ---
 <BaseLayout title={post.data.title} description={post.data.description}>
-  <article class="max-w-2xl mx-auto px-6 py-16">
-    <a href="/blog" class="text-sm text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors mb-8 inline-block">
-      ← Back to Blog
-    </a>
-    <time class="text-xs text-warm-subtle dark:text-dark-muted block mb-3">
-      {post.data.pubDate.toLocaleDateString('zh-TW')}
-    </time>
-    <h1 class="text-4xl font-extrabold text-warm-fg dark:text-dark-fg mb-8">{post.data.title}</h1>
-    <div class="prose prose-stone dark:prose-invert max-w-none">
-      <Content />
-    </div>
-  </article>
+  <div class="max-w-5xl mx-auto px-6 py-16 xl:grid xl:grid-cols-[minmax(0,42rem)_13rem] xl:gap-20">
+    <article class="max-w-2xl xl:max-w-none">
+      <a href="/blog" class="text-sm text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors mb-8 inline-block">
+        ← Back to Blog
+      </a>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-warm-subtle dark:text-dark-muted mb-3">
+        <time>
+          {post.data.pubDate.toLocaleDateString('zh-TW')}
+        </time>
+        <span aria-hidden="true">·</span>
+        <span>{readingMinutes} min read</span>
+        <span aria-hidden="true">·</span>
+        <span>{wordCount.toLocaleString('zh-TW')} 字</span>
+      </div>
+      <h1 class="text-4xl font-extrabold text-warm-fg dark:text-dark-fg mb-8">{post.data.title}</h1>
+      <div class="prose prose-stone dark:prose-invert max-w-none">
+        <Content />
+      </div>
+    </article>
+
+    {tocItems.length > 0 && (
+      <aside class="hidden xl:block sticky top-24 self-start pt-28">
+        <p class="text-[11px] font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-4">
+          Contents
+        </p>
+        <nav aria-label="Table of contents" data-application-slug={applicationSlug}>
+          <ol class="space-y-2">
+            {tocItems.map(heading => (
+              <li
+                data-application-child={heading.depth === 3 ? 'true' : undefined}
+                class:list={[
+                  heading.depth === 3 && 'toc-child-collapsed overflow-hidden transition-[max-height,opacity,transform,margin] duration-200 ease-out',
+                ]}
+              >
+                <a
+                  href={`#${heading.slug}`}
+                  data-toc-slug={heading.slug}
+                  class:list={[
+                    'block leading-snug text-warm-muted dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors',
+                    heading.depth === 3 ? 'pl-3 text-xs' : 'text-sm',
+                  ]}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ol>
+          <a
+            href="#top"
+            class="mt-6 inline-block text-xs font-medium text-warm-subtle dark:text-dark-muted hover:text-warm-accent dark:hover:text-dark-accent transition-colors"
+          >
+            Back to top ↑
+          </a>
+        </nav>
+      </aside>
+    )}
+  </div>
+
+  <a
+    href="#top"
+    aria-label="Back to top"
+    class="xl:hidden fixed bottom-5 right-5 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full border border-warm-border bg-warm-bg/85 text-warm-muted backdrop-blur-md transition-colors hover:text-warm-accent dark:border-dark-border dark:bg-dark-bg/85 dark:text-dark-muted dark:hover:text-dark-accent"
+  >
+    ↑
+  </a>
+
+  <script>
+    document.querySelectorAll<HTMLAnchorElement>('.prose a[href^="http"]').forEach(link => {
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+    });
+
+    const tocNav = document.querySelector<HTMLElement>('[data-application-slug]');
+    const applicationSlug = tocNav?.dataset.applicationSlug;
+    const applicationChildren = Array.from(document.querySelectorAll<HTMLElement>('[data-application-child="true"]'));
+    const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-toc-slug]'));
+
+    const setApplicationTocExpanded = (expanded: boolean) => {
+      applicationChildren.forEach(item => item.classList.toggle('toc-child-collapsed', !expanded));
+    };
+
+    const setActiveTocLink = (slug?: string) => {
+      tocLinks.forEach(link => {
+        const isActive = link.dataset.tocSlug === slug;
+        link.classList.toggle('text-warm-accent', isActive);
+        link.classList.toggle('dark:text-dark-accent', isActive);
+        link.classList.toggle('font-medium', isActive);
+        link.classList.toggle('text-warm-muted', !isActive);
+        link.classList.toggle('dark:text-dark-muted', !isActive);
+      });
+    };
+
+    if (tocNav && applicationSlug && applicationChildren.length > 0) {
+      const applicationLink = tocNav.querySelector<HTMLAnchorElement>(`[data-toc-slug="${applicationSlug}"]`);
+      applicationLink?.addEventListener('click', () => setApplicationTocExpanded(true));
+
+      const sectionHeadings = Array.from(document.querySelectorAll<HTMLHeadingElement>('.prose h2[id]'));
+      const updateExpandedSection = () => {
+        const current = sectionHeadings
+          .filter(heading => heading.getBoundingClientRect().top <= 140)
+          .at(-1);
+
+        setApplicationTocExpanded(current?.id === applicationSlug);
+        setActiveTocLink(current?.id);
+      };
+
+      updateExpandedSection();
+      window.addEventListener('scroll', updateExpandedSection, { passive: true });
+      window.addEventListener('hashchange', updateExpandedSection);
+    }
+  </script>
 </BaseLayout>
