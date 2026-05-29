@@ -1,6 +1,9 @@
 ---
 import ProjectCard from './ProjectCard.astro';
+import FeaturedProjectCard from './FeaturedProjectCard.astro';
 import { featuredProjects } from '../data/projects';
+
+const [hero, ...rest] = featuredProjects;
 ---
 <section
   class="max-w-5xl mx-auto px-6 py-14"
@@ -18,7 +21,11 @@ import { featuredProjects } from '../data/projects';
     </a>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-    {featuredProjects.map(project => <ProjectCard project={project} />)}
-  </div>
+  {hero && <FeaturedProjectCard project={hero} />}
+
+  {rest.length > 0 && (
+    <div class="mt-6 grid gap-3 md:grid-cols-2">
+      {rest.map(project => <ProjectCard project={project} />)}
+    </div>
+  )}
 </section>

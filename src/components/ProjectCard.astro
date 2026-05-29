@@ -6,15 +6,62 @@ interface Props {
   project: Project;
 }
 const { project } = Astro.props;
+
+const primaryHref = project.primaryLink ?? project.demo ?? project.github;
+const isExternal = !!primaryHref && /^https?:\/\//.test(primaryHref);
+
+const langLabel =
+  project.lang === 'zh' ? '中文' :
+  project.lang === 'en' ? 'EN' :
+  project.lang === 'both' ? '中 / EN' : null;
+
+const fallbackTag = project.tags[0] ?? '';
 ---
-<article class="group bg-warm-surface-2 dark:bg-dark-surface-2 rounded-xl p-6 flex flex-col gap-4 hover:bg-warm-surface dark:hover:bg-dark-surface transition-colors duration-200 cursor-default">
+<article class:list={[
+  'group relative bg-warm-surface-2 dark:bg-dark-surface-2 rounded-xl p-6 flex flex-col gap-4',
+  'hover:bg-warm-surface dark:hover:bg-dark-surface transition-all duration-200',
+  'motion-safe:hover:-translate-y-0.5',
+  primaryHref ? 'cursor-pointer' : 'cursor-default',
+]}>
+
+  {project.thumbnail ? (
+    <img
+      src={project.thumbnail}
+      alt={project.title}
+      loading="lazy"
+      decoding="async"
+      class="w-full aspect-[16/10] object-cover rounded-lg"
+    />
+  ) : (
+    <div class="w-full aspect-[16/10] rounded-lg bg-warm-accent-light dark:bg-dark-accent-wash flex items-center justify-center px-6">
+      <span class="font-display font-semibold text-3xl md:text-4xl text-warm-accent dark:text-dark-accent text-center leading-tight tracking-tight">
+        {fallbackTag}
+      </span>
+    </div>
+  )}
 
   <div class="flex-1 flex flex-col gap-2">
     <div class="flex items-baseline justify-between gap-2">
       <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg group-hover:text-warm-accent dark:group-hover:text-dark-accent transition-colors leading-snug">
-        {project.title}
+        {primaryHref ? (
+          <a
+            href={primaryHref}
+            target={isExternal ? '_blank' : undefined}
+            rel={isExternal ? 'noopener noreferrer' : undefined}
+            class="after:absolute after:inset-0 after:content-[''] after:rounded-xl focus:outline-none focus-visible:outline-none"
+          >
+            {project.title}
+          </a>
+        ) : (
+          project.title
+        )}
       </h3>
-      <span class="text-xs text-warm-subtle dark:text-dark-muted shrink-0">{project.year}</span>
+      <div class="flex items-baseline gap-2 shrink-0">
+        {langLabel && (
+          <span class="text-[11px] text-warm-subtle dark:text-dark-muted">{langLabel}</span>
+        )}
+        <span class="text-xs text-warm-subtle dark:text-dark-muted">{project.year}</span>
+      </div>
     </div>
     <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
       {project.description}
@@ -25,7 +72,7 @@ const { project } = Astro.props;
     {project.tags.map(tag => <TechPill label={tag} />)}
   </div>
 
-  <div class="flex gap-5 pt-1">
+  <div class="flex gap-5 pt-1 relative z-10">
     {project.github && (
       <a
         href={project.github}

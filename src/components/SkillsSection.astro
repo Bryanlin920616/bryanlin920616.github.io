@@ -15,15 +15,19 @@ const skillGroups = [
   </p>
 
   <div class="flex flex-col gap-3">
-    {skillGroups.map(group => (
-      <div class="flex items-baseline gap-4 sm:gap-6">
-        <span class="text-xs text-warm-subtle dark:text-dark-muted w-20 shrink-0 pt-px">
-          {group.label}
-        </span>
-        <p class="text-sm text-warm-fg dark:text-dark-fg leading-relaxed">
-          {group.skills.join(' · ')}
-        </p>
-      </div>
-    ))}
+    {skillGroups.map(group => {
+      const [primary, ...rest] = group.skills;
+      return (
+        <div class="flex items-baseline gap-4 sm:gap-6">
+          <span class="text-xs text-warm-subtle dark:text-dark-muted w-20 shrink-0 pt-px">
+            {group.label}
+          </span>
+          <p class="text-sm leading-relaxed">
+            <span class="font-semibold text-warm-fg dark:text-dark-fg">{primary}</span>
+            {rest.length > 0 && <span class="text-warm-muted dark:text-dark-muted"> · {rest.join(' · ')}</span>}
+          </p>
+        </div>
+      );
+    })}
   </div>
 </section>

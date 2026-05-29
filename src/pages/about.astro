@@ -14,23 +14,39 @@ import { profile } from '../data/profile';
       <!-- Bio -->
       <section class="mb-12">
         <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-4">
-          我是 Bryan Lin，就讀台北科技大學資訊工程系，GPA 3.95／4.00，五次書卷獎。
+          我是 Bryan Lin，就讀台北科技大學資訊工程系。
         </p>
         <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
           後端為主的全端工程師，擅長 Go、Python 與系統架構設計。喜歡把複雜問題拆解成清晰的解法，並透過乾淨的程式碼讓產品真正運作。
         </p>
       </section>
 
-      <!-- Skills -->
+      <!-- Now -->
       <section class="mb-12">
-        <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-4">Skills</h2>
-        <div class="flex flex-wrap gap-2">
-          {profile.skills.map(skill => <TechPill label={skill} />)}
+        <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-4">Now</h2>
+        {/* TODO: Bryan — 有空替換成真正想說的話 */}
+        <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
+          正在準備 2026 Fall CS 碩士申請，並整理過去專案的技術筆記與心得。工作上關注後端系統設計與效能優化。
+        </p>
+      </section>
+
+      <!-- Education -->
+      <section class="mb-12">
+        <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-6">Education</h2>
+        <div class="flex gap-4">
+          <div class="text-xs text-warm-subtle dark:text-dark-muted mt-1 w-28 shrink-0">Sep 2022 – Jun 2026</div>
+          <div>
+            <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg">B.S. Computer Science and Information Engineering</h3>
+            <p class="text-sm text-warm-accent dark:text-dark-accent mb-1">National Taipei University of Technology</p>
+            <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
+              GPA 3.95 / 4.00 · 五次書卷獎 (Dean's List × 5)
+            </p>
+          </div>
         </div>
       </section>
 
       <!-- Experience -->
-      <section>
+      <section class="mb-12">
         <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-6">Experience</h2>
         <div class="space-y-8">
           <div class="flex gap-4">
@@ -53,6 +69,14 @@ import { profile } from '../data/profile';
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section>
+        <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-4">Skills</h2>
+        <div class="flex flex-wrap gap-2">
+          {profile.skills.map(skill => <TechPill label={skill} />)}
         </div>
       </section>
 

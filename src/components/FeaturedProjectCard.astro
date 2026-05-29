@@ -1,0 +1,90 @@
+---
+import TechPill from './TechPill.astro';
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+
+const primaryHref = project.primaryLink ?? project.demo ?? project.github;
+const isExternal = !!primaryHref && /^https?:\/\//.test(primaryHref);
+const fallbackTag = project.tags[0] ?? '';
+---
+<article class:list={[
+  'group relative bg-warm-surface-2 dark:bg-dark-surface-2 rounded-2xl p-8 sm:p-10',
+  'hover:bg-warm-surface dark:hover:bg-dark-surface transition-all duration-200',
+  'motion-safe:transition-transform motion-safe:hover:-translate-y-0.5',
+  primaryHref ? 'cursor-pointer' : 'cursor-default',
+]}>
+  {primaryHref && (
+    <a
+      href={primaryHref}
+      target={isExternal ? '_blank' : undefined}
+      rel={isExternal ? 'noopener noreferrer' : undefined}
+      aria-label={project.title}
+      class="absolute inset-0 z-0 after:absolute after:inset-0 after:content-[''] rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-warm-accent dark:focus-visible:ring-dark-accent"
+    ></a>
+  )}
+
+  <div class="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
+    <div class="md:col-span-3 flex flex-col gap-5 relative z-[1] pointer-events-none">
+      <p class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted">
+        {project.year}
+      </p>
+
+      <h3 class="font-display font-semibold text-3xl sm:text-4xl leading-tight tracking-tight text-warm-fg dark:text-dark-fg group-hover:text-warm-accent dark:group-hover:text-dark-accent transition-colors">
+        {project.title}
+      </h3>
+
+      <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed max-w-[55ch]">
+        {project.description}
+      </p>
+
+      <div class="flex flex-wrap gap-1.5">
+        {project.tags.map(tag => <TechPill label={tag} />)}
+      </div>
+
+      <div class="flex flex-wrap gap-6 pt-2 pointer-events-auto relative z-10">
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="relative z-10 text-sm font-medium text-warm-fg dark:text-dark-fg underline decoration-warm-accent dark:decoration-dark-accent underline-offset-4 hover:text-warm-accent dark:hover:text-dark-accent transition-colors"
+          >
+            GitHub ↗
+          </a>
+        )}
+        {project.demo && (
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="relative z-10 text-sm font-medium text-warm-fg dark:text-dark-fg underline decoration-warm-accent dark:decoration-dark-accent underline-offset-4 hover:text-warm-accent dark:hover:text-dark-accent transition-colors"
+          >
+            Demo ↗
+          </a>
+        )}
+      </div>
+    </div>
+
+    <div class="hidden md:block md:col-span-2 relative z-[1] pointer-events-none">
+      {project.thumbnail ? (
+        <img
+          src={project.thumbnail}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          class="w-full aspect-[4/3] object-cover rounded-xl"
+        />
+      ) : (
+        <div class="w-full aspect-[4/3] rounded-xl bg-warm-accent-light dark:bg-dark-accent-wash flex items-center justify-center px-6">
+          <span class="font-display font-semibold text-4xl lg:text-5xl text-warm-accent dark:text-dark-accent text-center leading-tight tracking-tight">
+            {fallbackTag}
+          </span>
+        </div>
+      )}
+    </div>
+  </div>
+</article>

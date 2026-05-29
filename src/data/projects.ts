@@ -6,6 +6,9 @@ export interface Project {
   github?: string;
   demo?: string;
   featured: boolean;
+  thumbnail?: string;
+  lang?: 'zh' | 'en' | 'both';
+  primaryLink?: string;
 }
 
 export const projects: Project[] = [
@@ -17,6 +20,7 @@ export const projects: Project[] = [
     github: 'https://github.com/AidChen0509/Rockman',
     demo: 'https://www.youtube.com/watch?v=ZsLQwx-Hp84',
     featured: true,
+    lang: 'zh',
   },
 ];
 
