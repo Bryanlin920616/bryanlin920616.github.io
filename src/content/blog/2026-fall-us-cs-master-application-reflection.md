@@ -1,12 +1,22 @@
 ---
-title: "2026 Fall 美國 CS Master 申請心得"
-description: "從申請背景、選校策略、文件準備到錄取結果，整理 2026 Fall 美國 CS Master 申請過程的完整心得。"
+title: "2026 Fall 美國 CS Master 申請心得：CMU MSIN、UIUC MCS 錄取紀錄"
+description: "科大資工背景申請 2026 Fall 美國 CS Master 的完整心得，包含 GPA、TOEFL、GRE、選校策略、SoP、PS、LoR、CV、video essays 與錄取結果。"
 pubDate: 2026-05-29
+updatedDate: 2026-05-29
 tags: ["Graduate School", "CS Master", "Study Abroad"]
 draft: false
 ---
 
 > 我非常推薦先看文末的推薦文章，都是我申請過程中多次拜讀的文章，但他們都很強。如果跟我一樣是個菜雞，著重把自己的故事寫好就好了。
+
+這篇是我申請 **2026 Fall 美國 CS Master / ECE Master** 的完整紀錄，主要寫給非四大資工有高GPA、想申請修課型或就業型碩士的人。內容包含申請背景、選校策略、CMU MSIN / UIUC MCS / Columbia MSCS 等錄取結果，以及 SoP、PS、LoR、CV、video essays 的準備方式，包涵文件撰寫架構供為參考。
+
+如果你正在搜尋「美國 CS 碩士申請心得」、「CS Master 申請背景」、「CMU MSIN 申請心得」或「美國研究所選校策略」，可以先看下面幾個重點，再依照自己有興趣的地方跳到對應段落。
+
+- **申請背景**：NTUT CSIE、GPA 3.95 / 4.0、TOEFL 104、GRE 318，兩段軟體實習。
+- **申請方向**：以修課型、就業型 Program 為主，偏 distributed systems、database、cloud computing 和 software engineering。
+- **最後決定**：CMU MSIN。
+- **文件重點**：把自己的專題、實習和修課經驗串成一條清楚的敘事，著重於脈絡性而不只是堆經歷。
 
 ## 前言
 

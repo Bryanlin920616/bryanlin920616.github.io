@@ -11,6 +11,7 @@ interface Props {
   image?: string;
   type?: 'website' | 'article';
   pubDate?: Date;
+  updatedDate?: Date;
   tags?: string[];
 }
 
@@ -20,6 +21,7 @@ const {
   image,
   type = 'website',
   pubDate,
+  updatedDate,
   tags = [],
 } = Astro.props;
 
@@ -35,7 +37,11 @@ const jsonLd = {
   description,
   url: canonicalUrl,
   inLanguage: 'zh-TW',
+  ...(type === 'article' ? { mainEntityOfPage: canonicalUrl } : {}),
   ...(type === 'article' && pubDate ? { datePublished: pubDate.toISOString() } : {}),
+  ...(type === 'article' && (updatedDate ?? pubDate)
+    ? { dateModified: (updatedDate ?? pubDate)?.toISOString() }
+    : {}),
   ...(type === 'article' && tags.length > 0 ? { keywords: tags.join(', ') } : {}),
   author: {
     '@type': 'Person',
