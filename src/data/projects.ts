@@ -15,7 +15,7 @@ export const projects: Project[] = [
   {
     title: 'Rockman Remake',
     year: 2023,
-    description: '以提供的遊戲框架重製經典橫向捲軸遊戲，運用 OOP（封裝、繼承、多型）架構場景、角色與敵人；Boss 攻擊模式以 FSM 實作。另以 Python（Pillow + NumPy）開發自動化地圖生成工具，將 2 個關卡共 40K+ 地塊的建立時間從數小時壓縮至數秒。',
+    description: '用課程提供的遊戲框架復刻 Rockman。除了角色、敵人和 Boss 狀態機，也順手寫了一個 Python 地圖工具，把原本要手動排很久的 40K+ 地塊生出來。是我第一個用C++寫的Project，也是第一次感受到OOP的魅力。',
     tags: ['C++', 'OOP', 'FSM', 'Game Dev', 'Python'],
     github: 'https://github.com/AidChen0509/Rockman',
     demo: 'https://www.youtube.com/watch?v=ZsLQwx-Hp84',

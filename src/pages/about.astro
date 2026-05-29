@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import TechPill from '../components/TechPill.astro';
 import { profile } from '../data/profile';
 ---
-<BaseLayout title={`About — ${profile.name}`} description="關於我的介紹、技能與工作經歷">
+<BaseLayout title={`About — ${profile.name}`} description="關於 Bryan 的一些背景、作品和最近在做的事">
   <div class="max-w-5xl mx-auto px-6 py-16">
 
     <h1 class="font-display text-4xl font-bold text-warm-fg dark:text-dark-fg mb-3">About</h1>
@@ -14,19 +14,13 @@ import { profile } from '../data/profile';
       <!-- Bio -->
       <section class="mb-12">
         <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-4">
-          我是 Bryan Lin，就讀台北科技大學資訊工程系。
+          我是 Bryan，畢業於北科，大一念的是機電學士班，後來轉系到資工系開始寫程式的旅程。
         </p>
-        <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
-          後端為主的全端工程師，擅長 Go、Python 與系統架構設計。喜歡把複雜問題拆解成清晰的解法，並透過乾淨的程式碼讓產品真正運作。
+        <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-4">
+          這個網站主要會放我的心得文，不然Medium都不索引我的文章☹️ 希望之後到美國後有時間紀錄實習、找工、生活的大小事，並且與大家分享。
         </p>
-      </section>
-
-      <!-- Now -->
-      <section class="mb-12">
-        <h2 class="text-xs font-semibold tracking-[0.18em] uppercase text-warm-subtle dark:text-dark-muted mb-4">Now</h2>
-        {/* TODO: Bryan — 有空替換成真正想說的話 */}
-        <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
-          正在準備 2026 Fall CS 碩士申請，並整理過去專案的技術筆記與心得。工作上關注後端系統設計與效能優化。
+        <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-4">
+          我還滿喜歡寫程式的，但是想著有學不完的壓力又沒那麼喜歡了，希望能趕快上岸賺錢，然後去世界各地體驗人生！
         </p>
       </section>
 
@@ -39,7 +33,7 @@ import { profile } from '../data/profile';
             <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg">B.S. Computer Science and Information Engineering</h3>
             <p class="text-sm text-warm-accent dark:text-dark-accent mb-1">National Taipei University of Technology</p>
             <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
-              GPA 3.95 / 4.00 · 五次書卷獎 (Dean's List × 5)
+              GPA 3.95 / 4.00 · 書卷獎 x 5
             </p>
           </div>
         </div>
@@ -55,7 +49,7 @@ import { profile } from '../data/profile';
               <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg">Software Engineering Intern</h3>
               <p class="text-sm text-warm-accent dark:text-dark-accent mb-1">ARwork & Co., Ltd.</p>
               <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
-                開發微服務架構的活動報名平台，負責 20+ API 端點的活動與表單管理服務；以 Manticore Search 取代 MongoDB，查詢效能提升 10.6 倍；並實作 WebSocket + Yjs CRDT 的即時協作畫布原型及 MCP Server。
+                在新創團隊裡做活動報名平台和一些內部工具，寫的語言主要是Golang，也是在這邊第一次接觸到微服務架構！
               </p>
             </div>
           </div>
@@ -65,7 +59,7 @@ import { profile } from '../data/profile';
               <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg">Software Engineering Intern</h3>
               <p class="text-sm text-warm-accent dark:text-dark-accent mb-1">Galaxy Software Services</p>
               <p class="text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
-                參與台灣主流公文管理系統的開發與維護，實作機密文件呈核線上簽核流程，解決 25+ 軟體缺陷並完成 30+ 客製化需求。
+                參與公文管理系統的開發與維護📝 用 ASP .NET MVC 框架寫 C#
               </p>
             </div>
           </div>

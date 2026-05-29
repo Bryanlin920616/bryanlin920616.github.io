@@ -1,7 +1,7 @@
 export const profile = {
   name: 'Bryan Lin',
-  role: 'Backend-Focused Full-Stack Engineer',
-  tagline: '後端為主的全端工程師，擅長設計可擴展的系統架構與 API 設計，喜歡把複雜問題拆解成清晰的解法。',
+  role: 'Writing, building, learning',
+  tagline: '寫一些生活、工作和學習路上的紀錄。偶爾是工程，偶爾是申請，也可能只是某段時間留下來的小事。',
   location: 'Taipei, Taiwan',
   openToWork: true,
   email: '920616bryanlin@gmail.com',

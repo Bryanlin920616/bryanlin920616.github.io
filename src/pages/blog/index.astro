@@ -13,18 +13,18 @@ const upcoming = [
     title: 'Graduate School Applications',
     lang: '中文',
     description:
-      '2026 Fall CS 碩士申請的完整紀錄 — 從選校、SOP 到面試，寫給之後要申請的人看。',
+      '2026 Fall CS 碩士申請的完整紀錄。選校、文件、結果和一些當時很糾結的判斷，都先放在這裡。',
   },
   {
     status: 'Ongoing',
     title: 'Engineering Notes',
     lang: '中 / EN',
     description:
-      'System design 拆解、工具鏈探索、debugging 故事 — 學到的東西整理成文字比較記得住。',
+      'System design、工具鏈、debugging，還有一些寫完才發現可以講清楚的工程小題目。',
   },
 ];
 ---
-<BaseLayout title={`Blog — ${profile.name}`} description="Writing on engineering, study, and the things Bryan is paying attention to.">
+<BaseLayout title={`Blog — ${profile.name}`} description="生活、工作和學習路上的紀錄。">
   <div class="max-w-5xl mx-auto px-6 py-16">
 
     <h1 class="font-display text-4xl font-bold text-warm-fg dark:text-dark-fg mb-3">Blog</h1>
@@ -35,10 +35,10 @@ const upcoming = [
     {posts.length === 0 ? (
       <>
         <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed mb-2">
-          Writing on engineering, study, and the things I'm paying attention to.
+          寫一些生活、工作和學習路上的紀錄。
         </p>
         <p class="text-base text-warm-muted dark:text-dark-muted leading-relaxed">
-          第一篇預計 2026 年春發佈。
+          不是教科書，也不是成功學，比較像把當時怎麼想、怎麼做、哪裡踩坑留下來，給之後的自己或剛好需要的人看。
         </p>
 
         <section class="mt-16 border-t border-warm-border dark:border-dark-border">
@@ -63,13 +63,13 @@ const upcoming = [
         </section>
 
         <p class="mt-10 text-sm text-warm-muted dark:text-dark-muted leading-relaxed">
-          Want to know when I publish? Follow on{' '}
+          之後有新的文章，通常會一起放在{' '}
           <a href={profile.github} target="_blank" rel="noopener noreferrer" class="text-warm-fg dark:text-dark-fg underline decoration-warm-accent dark:decoration-dark-accent underline-offset-4 hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
             GitHub
           </a>
-          {' '}or{' '}
+          {' '}或直接{' '}
           <a href={`mailto:${profile.email}`} class="text-warm-fg dark:text-dark-fg underline decoration-warm-accent dark:decoration-dark-accent underline-offset-4 hover:text-warm-accent dark:hover:text-dark-accent transition-colors">
-            drop a line
+            寄信給我
           </a>.
         </p>
       </>
