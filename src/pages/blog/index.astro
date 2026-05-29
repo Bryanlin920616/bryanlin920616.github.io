@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { profile } from '../../data/profile';
+import { sitePath } from '../../utils/urls';
 
 const posts = (await getCollection('blog'))
   .filter(p => !p.data.draft)
@@ -77,7 +78,7 @@ const upcoming = [
       <ul class="space-y-6">
         {posts.map(post => (
           <li>
-            <a href={`/blog/${post.slug}`} class="group block">
+            <a href={sitePath(`/blog/${post.slug}`)} class="group block">
               <time class="text-xs text-warm-subtle dark:text-dark-muted">
                 {post.data.pubDate.toLocaleDateString('zh-TW')}
               </time>

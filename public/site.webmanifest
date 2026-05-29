@@ -1,0 +1,17 @@
+{
+  "name": "Bryan Lin",
+  "short_name": "Bryan Lin",
+  "description": "Bryan 的個人網站，寫一些生活、工作和學習路上的紀錄。",
+  "start_url": "/portfolio/",
+  "scope": "/portfolio/",
+  "display": "standalone",
+  "background_color": "#faf7f2",
+  "theme_color": "#faf7f2",
+  "icons": [
+    {
+      "src": "/portfolio/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

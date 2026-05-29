@@ -2,6 +2,7 @@
 import ProjectCard from './ProjectCard.astro';
 import FeaturedProjectCard from './FeaturedProjectCard.astro';
 import { featuredProjects } from '../data/projects';
+import { sitePath } from '../utils/urls';
 
 const [hero, ...rest] = featuredProjects;
 ---
@@ -14,7 +15,7 @@ const [hero, ...rest] = featuredProjects;
       Featured Work
     </p>
     <a
-      href="/projects"
+      href={sitePath('/projects')}
       class="text-xs font-medium text-warm-muted dark:text-dark-muted hover:text-warm-fg dark:hover:text-dark-fg transition-colors"
     >
       View all →

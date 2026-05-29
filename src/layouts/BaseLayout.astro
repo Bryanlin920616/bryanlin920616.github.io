@@ -1,14 +1,48 @@
 ---
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { profile } from '../data/profile';
+import { absoluteSiteUrl, sitePath } from '../utils/urls';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  pubDate?: Date;
+  tags?: string[];
 }
 
-const { title, description = '後端為主的全端工程師' } = Astro.props;
+const {
+  title,
+  description = profile.tagline,
+  image,
+  type = 'website',
+  pubDate,
+  tags = [],
+} = Astro.props;
+
+const canonicalUrl = absoluteSiteUrl(Astro.url.pathname, Astro.site);
+const titleTemplate = title.includes(profile.name) ? title : `${title} | ${profile.name}`;
+const socialImage = image ? absoluteSiteUrl(image, Astro.site) : undefined;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': type === 'article' ? 'BlogPosting' : 'WebSite',
+  name: titleTemplate,
+  headline: titleTemplate,
+  description,
+  url: canonicalUrl,
+  inLanguage: 'zh-TW',
+  ...(type === 'article' && pubDate ? { datePublished: pubDate.toISOString() } : {}),
+  ...(type === 'article' && tags.length > 0 ? { keywords: tags.join(', ') } : {}),
+  author: {
+    '@type': 'Person',
+    name: profile.name,
+    url: absoluteSiteUrl('/', Astro.site),
+    sameAs: [profile.github, profile.linkedin],
+  },
+};
 ---
 <!doctype html>
 <html lang="zh-TW">
@@ -16,8 +50,24 @@ const { title, description = '後端為主的全端工程師' } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <title>{title}</title>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="author" content={profile.name} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{titleTemplate}</title>
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <link rel="manifest" href={sitePath('/site.webmanifest')} />
+    <meta property="og:title" content={titleTemplate} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="zh_TW" />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={titleTemplate} />
+    <meta name="twitter:description" content={description} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     <!-- 防止 dark mode flash：在 body render 前設定 class -->
     <script is:inline>
       const stored = localStorage.getItem('theme');
