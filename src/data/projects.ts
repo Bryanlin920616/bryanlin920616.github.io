@@ -20,6 +20,7 @@ export const projects: Project[] = [
     github: 'https://github.com/AidChen0509/Rockman',
     demo: 'https://www.youtube.com/watch?v=ZsLQwx-Hp84',
     featured: true,
+    thumbnail: '/projects/rockman-init-background.bmp',
     lang: 'zh',
   },
 ];

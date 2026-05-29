@@ -7,9 +7,6 @@ interface Props {
 }
 const { project } = Astro.props;
 
-const primaryHref = project.primaryLink ?? project.demo ?? project.github;
-const isExternal = !!primaryHref && /^https?:\/\//.test(primaryHref);
-
 const langLabel =
   project.lang === 'zh' ? '中文' :
   project.lang === 'en' ? 'EN' :
@@ -21,7 +18,7 @@ const fallbackTag = project.tags[0] ?? '';
   'group relative bg-warm-surface-2 dark:bg-dark-surface-2 rounded-xl p-6 flex flex-col gap-4',
   'hover:bg-warm-surface dark:hover:bg-dark-surface transition-all duration-200',
   'motion-safe:hover:-translate-y-0.5',
-  primaryHref ? 'cursor-pointer' : 'cursor-default',
+  'cursor-default',
 ]}>
 
   {project.thumbnail ? (
@@ -42,19 +39,8 @@ const fallbackTag = project.tags[0] ?? '';
 
   <div class="flex-1 flex flex-col gap-2">
     <div class="flex items-baseline justify-between gap-2">
-      <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg group-hover:text-warm-accent dark:group-hover:text-dark-accent transition-colors leading-snug">
-        {primaryHref ? (
-          <a
-            href={primaryHref}
-            target={isExternal ? '_blank' : undefined}
-            rel={isExternal ? 'noopener noreferrer' : undefined}
-            class="after:absolute after:inset-0 after:content-[''] after:rounded-xl focus:outline-none focus-visible:outline-none"
-          >
-            {project.title}
-          </a>
-        ) : (
-          project.title
-        )}
+      <h3 class="text-base font-semibold text-warm-fg dark:text-dark-fg leading-snug">
+        {project.title}
       </h3>
       <div class="flex items-baseline gap-2 shrink-0">
         {langLabel && (
