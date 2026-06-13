@@ -61,7 +61,9 @@ const jsonLd = {
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl} />
     <title>{titleTemplate}</title>
+    <link rel="icon" type="image/png" sizes="48x48" href={sitePath('/favicon-48.png')} />
     <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
+    <link rel="apple-touch-icon" sizes="180x180" href={sitePath('/apple-touch-icon.png')} />
     <link rel="manifest" href={sitePath('/site.webmanifest')} />
     <meta property="og:title" content={titleTemplate} />
     <meta property="og:description" content={description} />

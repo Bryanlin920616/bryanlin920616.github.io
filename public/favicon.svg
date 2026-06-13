@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 128 128">
-  <rect width="128" height="128" rx="16" fill="#D97706"/>
-  <text x="50%" y="50%" text-anchor="middle" dominant-baseline="central" font-size="64" font-family="system-ui" fill="white">P</text>
+  <rect width="128" height="128" rx="24" fill="#415E6B"/>
+  <path d="M45 29c0-6 5-11 11-11s11 5 11 11v35c8-8 18-12 30-9 17 4 28 19 27 37-2 20-18 34-39 34-23 0-40-17-40-40V29Z" fill="#FFF5DF"/>
+  <path d="M67 89c0 11 8 20 19 20 12 0 21-9 21-21s-9-21-21-21c-11 0-19 8-19 20v2Z" fill="#415E6B"/>
+  <path d="M68 96c4 8 12 13 22 13 8 0 15-3 20-9-4 15-17 26-34 26-10 0-19-3-26-9 7-2 14-9 18-21Z" fill="#FFF5DF"/>
 </svg>
